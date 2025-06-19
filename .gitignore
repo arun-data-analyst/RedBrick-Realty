@@ -1,0 +1,19 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Ignore Streamlit or local config
+.streamlit/config.toml
+*.env
+
+# Ignore model files
+model/
+*.pkl
+
+# Ignore test or sandbox scripts
+test/
+scraper/
+generator/
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
