@@ -80,8 +80,8 @@ elif mode == "🌐 Live Scrape Mode (WIP)":
 
 elif mode == "📤 Upload CSV":
     st.markdown("## 📤 Upload Your Own Listings")
-    with open("redbrick_template.csv", "rb") as f:
-        st.download_button("📎 Download Sample CSV Template", data=f, file_name="redbrick_template.csv")
+    with open("data/redbrick_template.csv", "rb") as f:
+        st.download_button("📎 Download Sample CSV Template", data=f, file_name="data/redbrick_template.csv")
 
     st.info("""📋 **Required Columns**
 To generate high-quality descriptions, your CSV file must include:

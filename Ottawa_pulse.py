@@ -3,7 +3,7 @@ import pandas as pd
 import altair as alt
 
 # Load data
-df = pd.read_csv("listings_sample.csv", parse_dates=["date_listed"])
+df = pd.read_csv("data/listings_sample.csv", parse_dates=["date_listed"])
 
 # Title
 st.title("🏠 Ottawa Listing Pulse")
