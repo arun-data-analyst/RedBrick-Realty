@@ -1,0 +1,6 @@
+altair
+openai
+pandas
+requests
+scikit-learn
+streamlit

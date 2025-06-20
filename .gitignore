@@ -1,19 +1,25 @@
-# Ignore Python cache and compiled files
+# 📁 Ignore Python bytecode and cache
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Ignore Streamlit or local config
-.streamlit/config.toml
+# 📁 Ignore environment/config files
 *.env
+.streamlit/config.toml
 
-# Ignore model files
-model/
+# 📁 Ignore model artifacts
 *.pkl
+model/
 
-# Ignore test or sandbox scripts
+# 📁 Ignore temporary scripts and testing
 test/
+tests/
 scraper/
 generator/
+banner_test.py
 
-# Ignore Jupyter checkpoints
+# 📁 Ignore Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# 📁 Ignore logs and local output
+*.log
+.DS_Store
