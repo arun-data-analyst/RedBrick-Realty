@@ -1,102 +1,103 @@
-# 🛡️ RedBrick Realty
+# 🛡️ RedBrick Realty: The Gunner’s Listings
 
-> *Precision-crafted real estate listing generator, inspired by Arsenal FC — built for quality, not for copying.*
-
----
-
-## ⚠️ License Notice
-
-This project is **shared for personal inspiration and portfolio viewing only**.
-
-**🔒 All rights reserved.**  
-You are **not permitted to copy, reuse, or redistribute** any part of this codebase without explicit permission.
-
-© Arun Acharya 2025
+RedBrick Realty is a professional, Arsenal-themed real estate web application built with Streamlit. It allows users to explore demo property listings, upload their own CSV files, and optionally scrape live listings from Realtor.ca (experimental). The app enhances listings with GPT-powered luxury descriptions and can predict property prices using retrained models.
 
 ---
 
-## 🎯 About the App
+## 📌 Features
 
-RedBrick Realty is a Streamlit-powered app that generates luxury-style Canadian real estate listing descriptions. It blends clean UI, Arsenal-themed branding, and GPT-style intelligence to help you turn raw property data into polished, professional text.
+- 🎯 **Three Modes**
+  - **Demo Mode**: Preview sample listings with or without GPT-enhanced descriptions
+  - **Upload CSV**: Upload your own listings, generate descriptions, and get price predictions
+  - **Live Scrape Mode**: Search listings on Realtor.ca using URL-based scraping *(experimental)*
+
+- 🧠 **GPT Luxury Descriptions**
+  - Powered by OpenAI GPT (via API)
+  - Refined, aspirational tone with optional special features
+
+- 📊 **Price Prediction**
+  - Model retrained on user-uploaded CSV
+  - Predicts price based on property type, beds, baths
+
+- 🛡️ **Thematic Arsenal Branding**
+  - Custom Emirates Stadium background (AB3.png)
+  - Arsenal-style footer: _Crafted by Arun Acharya · Powered by Streamlit · Forever a Gunner_
+
+- 💾 **Downloadable Output**
+  - Download CSV with generated descriptions and predictions
+  - UTF-8 encoded to avoid character glitches
+
+- 🧱 **Modular Architecture**
+  - `modules/`: main logic for scraping, training, and GPT generation
+  - `utils/`: shared assets and helper functions
+  - `assets/`: stadium background image
 
 ---
 
-## 🚀 Features
+## 🚀 Setup & Run
 
-- 🏠 Upload your own CSV listings or use a built-in demo
-- ✨ Generate polished property descriptions with optional GPT enhancements
-- 📄 Download results as CSV files
-- 🧠 Price predictor powered by a trained regression model
-- 🎨 Arsenal-inspired styling and UX
-- 🌐 Live Scrape Mode *(UI ready — backend in progress)*
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/arun-data-analyst/RedBrickRealty.git
+   cd RedBrickRealty
+   ```
+
+2. **Create a virtual environment**
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Set your OpenAI API key**
+   Create a `.env` file and add:
+   ```env
+   OPENAI_API_KEY=your-api-key-here
+   ```
+
+5. **Run the app**
+   ```bash
+   streamlit run streamlit_app.py
+   ```
 
 ---
 
-## 📤 Required CSV Columns
+## 🗂️ Project Structure
 
-Your CSV must include the following columns (case-sensitive):
-
+```text
+📦 RedBrickRealty/
+├── streamlit_app.py               # ✅ Main unified app
+├── assets/
+│   └── AB3.png                    # Arsenal stadium background
+├── modules/
+│   ├── description_generator.py   # Calls GPT description API
+│   ├── model_trainer.py           # Price prediction model
+│   ├── realtor_scraper_url.py     # Realtor.ca URL-based scraping
+│   └── utils.py                   # Sample data, column checks
+├── utils/
+│   └── luxury_generator.py        # OpenAI client and GPT wrapper
+├── .env                           # 🔐 Your OpenAI API key (not committed)
+├── .gitignore                     # Clean Git tracking
+└── requirements.txt               # App dependencies
 ```
-MLS_ID, Property_Type, Price, Bedrooms, Bathrooms, City, Postal_Code, Features
-```
-
-✅ A sample file is included at:  
-`data/redbrick_template.csv`
 
 ---
 
-## 🧪 Demo Mode
+## 🏗️ Known Limitations
 
-1. Select **Demo Mode**
-2. View or edit the preloaded listing
-3. Generate a description
-4. Download the result
+- Live scraping is experimental and may fail if Realtor.ca changes structure
+- GPT features require a valid OpenAI API key and internet connection
 
 ---
 
-## 🛠️ Running Locally
+## 💬 Acknowledgements
 
-To run the app on your machine:
+- Crafted by **Arun Acharya**
+- Powered by **Streamlit**
+- Inspired by the legacy of **Arsenal FC**
 
-```bash
-git clone https://github.com/arun-data-analyst/RedBrick-Realty.git
-cd RedBrick-Realty
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-Make sure you have Python 3.10+ and `streamlit` installed.
-
----
-
-## 📁 Project Structure
-
-```
-RedBrickRealty/
-├── app.py                  # Main Streamlit app
-├── README.md
-├── .gitignore
-├── data/                   # Sample & template CSVs
-├── model/                  # Trained model + trainer script
-├── utils/                  # Prediction logic
-├── screenshots/            # UI snapshots
-├── tests/                  # Optional test or experimental scripts
-├── assets/                 # Optional base64 background assets
-```
-
----
-
-## 📸 Screenshots
-
-![Upload UI](screenshots/upload_csv_ui.png)  
-![Prediction UI](screenshots/price_predictor_ui.png)
-
----
-
-## 📬 Contact
-
-**Arun Acharya**  
-[GitHub: arun-data-analyst](https://github.com/arun-data-analyst)
-
----
-
+> *Forever a Gunner. Forever Data-Driven.* 🔴⚪
