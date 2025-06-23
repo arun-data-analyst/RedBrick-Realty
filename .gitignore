@@ -1,25 +1,35 @@
-# 📁 Ignore Python bytecode and cache
+# 📁 Python cache and bytecode
 __pycache__/
 *.py[cod]
 
-# 📁 Ignore environment/config files
+# 📁 Environment & config files
 *.env
 .streamlit/config.toml
 
-# 📁 Ignore model artifacts
+# 📁 Model artifacts
 *.pkl
 model/
 
-# 📁 Ignore temporary scripts and testing
+# 📁 Testing & local dev scripts
 test/
 tests/
 scraper/
 generator/
 banner_test.py
+realtor_scraper_core.py
+realtor_scraper_selenium.py
+scrape_realtor_updated.py
+extract_dropdown_values.py
+streamlit_app_csv.py
 
-# 📁 Ignore Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-# 📁 Ignore logs and local output
+# 📁 Output files
 *.log
+*.csv
+*.txt
+
+# 📁 OS junk
 .DS_Store
+
+# 📁 Executables and local drivers
+*.exe
+chromedriver-win64/

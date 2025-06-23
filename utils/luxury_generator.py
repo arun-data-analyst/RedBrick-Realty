@@ -3,7 +3,15 @@ import os
 from openai import OpenAI
 
 # Setup OpenAI client with API key
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+def generate_luxury_description(property_data: dict, model="gpt-3.5-turbo") -> str:
+    from openai import OpenAI
+    import os
+
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return "Error: Missing OpenAI API key. Please set OPENAI_API_KEY as an environment variable."
+
+    client = OpenAI(api_key=api_key)
 
 
 def generate_luxury_description(property_data: dict, model="gpt-3.5-turbo") -> str:
@@ -39,3 +47,35 @@ Write in 3–5 polished sentences.
 
     except Exception as e:
         return f"Error generating description: {str(e)}"
+
+import pandas as pd
+
+# ✅ Sample data for demo mode
+sample_data = pd.DataFrame([
+    {
+        "MLS_ID": "100001",
+        "Property_Type": "Condo",
+        "Price": 899000,
+        "Bedrooms": 2,
+        "Bathrooms": 2,
+        "City": "Ottawa",
+        "Postal_Code": "K2P 1L4",
+        "Features": "Balcony, Gym, Pool"
+    },
+    {
+        "MLS_ID": "100002",
+        "Property_Type": "Townhouse",
+        "Price": 1149000,
+        "Bedrooms": 3,
+        "Bathrooms": 3,
+        "City": "Toronto",
+        "Postal_Code": "M5V 2T6",
+        "Features": "Garage, Fireplace, Finished Basement"
+    }
+])
+
+# ✅ Required columns for upload validation
+required_columns = [
+    "MLS_ID", "Property_Type", "Price", "Bedrooms", "Bathrooms", "City", "Postal_Code", "Features"
+]
+

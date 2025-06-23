@@ -1,0 +1,121 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "56179cf7-6699-43e7-89f0-6423c16bd689",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "DeltaGenerator()"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import streamlit as st\n",
+    "import pandas as pd\n",
+    "import altair as alt\n",
+    "\n",
+    "# Load data\n",
+    "df = pd.read_csv(\"data/listings_sample.csv\", parse_dates=[\"date_listed\"])\n",
+    "\n",
+    "# Title\n",
+    "st.title(\"🏠 Ottawa Listing Pulse\")\n",
+    "st.markdown(\"Live dashboard showing listing trends across Ottawa neighborhoods.\")\n",
+    "\n",
+    "# KPI summary\n",
+    "active_listings = df[df['status'].str.lower() == 'active']\n",
+    "total_active = active_listings.shape[0]\n",
+    "new_this_month = df[df['date_listed'] >= pd.to_datetime(\"2025-06-01\")].shape[0]\n",
+    "avg_price = int(active_listings[\"price\"].mean())\n",
+    "\n",
+    "col1, col2, col3 = st.columns(3)\n",
+    "col1.metric(\"Active Listings\", total_active)\n",
+    "col2.metric(\"New This Month\", new_this_month)\n",
+    "col3.metric(\"Avg Price (Active)\", f\"${avg_price:,.0f}\")\n",
+    "\n",
+    "# Listings by neighborhood\n",
+    "st.subheader(\"📍 Listings by Neighborhood\")\n",
+    "neigh_counts = active_listings[\"neighborhood\"].value_counts().reset_index()\n",
+    "neigh_counts.columns = [\"Neighborhood\", \"Active Listings\"]\n",
+    "st.bar_chart(neigh_counts.set_index(\"Neighborhood\"))\n",
+    "\n",
+    "# Price trend by neighborhood (optional)\n",
+    "st.subheader(\"📈 Average Price by Neighborhood\")\n",
+    "price_by_neigh = active_listings.groupby(\"neighborhood\")[\"price\"].mean().reset_index()\n",
+    "price_chart = alt.Chart(price_by_neigh).mark_bar().encode(\n",
+    "    x=alt.X('neighborhood:N', title='Neighborhood'),\n",
+    "    y=alt.Y('price:Q', title='Avg Price'),\n",
+    "    tooltip=['neighborhood', 'price']\n",
+    ").properties(width=600, height=400)\n",
+    "st.altair_chart(price_chart)\n",
+    "\n",
+    "# Download option\n",
+    "st.subheader(\"⬇️ Download Full Dataset\")\n",
+    "st.download_button(\"Download CSV\", data=df.to_csv(index=False), file_name=\"ottawa_listings.csv\", mime=\"text/csv\")\n",
+    "\n",
+    "# Footer\n",
+    "st.markdown(\"---\")\n",
+    "st.caption(\"Built with 💻 by your solo data analyst.\")\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "229dd3d0-9e12-4f05-a1e0-e81f906af47c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "status\n",
+      "Sold       57\n",
+      "Active     50\n",
+      "Pending    43\n",
+      "Name: count, dtype: int64\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(df[\"status\"].value_counts())\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a0ad13da-9436-41c1-adaf-e51e2f15ebba",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
